@@ -1,0 +1,6 @@
+{
+  "name": "Calculadora Python & Web",
+  "description": "Calculadora minimalista com tema escuro e detalhes em vermelho, histórico local, grandes botões responsivos e guia didático de Python para iniciantes por Igor Almeida.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
