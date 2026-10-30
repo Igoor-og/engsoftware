@@ -17,7 +17,8 @@ export const PythonSimulator: React.FC = () => {
     '  [2] - Subtração',
     '  [3] * Multiplicação',
     '  [4] / Divisão',
-    '  [5] H Ver Histórico',
+    '  [5] % Porcentagem',
+    '  [6] H Ver Histórico',
     '  [0] S Sair do programa',
     '===================================='
   ]);
@@ -26,14 +27,16 @@ export const PythonSimulator: React.FC = () => {
     '1': '+',
     '2': '-',
     '3': '*',
-    '4': '/'
+    '4': '/',
+    '5': '%'
   };
 
   const opNames: Record<string, string> = {
     '1': 'somar',
     '2': 'subtrair',
     '3': 'multiplicar',
-    '4': 'dividir'
+    '4': 'dividir',
+    '5': 'porcentagem'
   };
 
   const handleSimulate = () => {
@@ -64,6 +67,7 @@ export const PythonSimulator: React.FC = () => {
       if (chosenOp === '2') res = n1 - n2;
       if (chosenOp === '3') res = n1 * n2;
       if (chosenOp === '4') res = n1 / n2;
+      if (chosenOp === '5') res = (n1 * n2) / 100;
 
       // round
       res = parseFloat(res.toFixed(6));
@@ -72,7 +76,7 @@ export const PythonSimulator: React.FC = () => {
 
     setTerminalLogs((prev) => [
       ...prev,
-      `>>> input("Escolha uma opção (0 a 5): "): ${chosenOp}`,
+      `>>> input("Escolha uma opção (0 a 6): "): ${chosenOp}`,
       `>>> input("Digite o primeiro número: "): ${num1}`,
       `>>> input("Digite o segundo número: "): ${num2}`,
       `[PYTHON] Chamando a função: ${funcName}(a=${n1}, b=${n2})`,
@@ -96,7 +100,8 @@ export const PythonSimulator: React.FC = () => {
       '  [2] - Subtração',
       '  [3] * Multiplicação',
       '  [4] / Divisão',
-      '  [5] H Ver Histórico',
+      '  [5] % Porcentagem',
+      '  [6] H Ver Histórico',
       '  [0] S Sair do programa',
       '===================================='
     ]);
@@ -144,7 +149,8 @@ export const PythonSimulator: React.FC = () => {
                 { id: '1', label: '[1] Adição (+)' },
                 { id: '2', label: '[2] Subtração (-)' },
                 { id: '3', label: '[3] Multiplicação (*)' },
-                { id: '4', label: '[4] Divisão (/)' }
+                { id: '4', label: '[4] Divisão (/)' },
+                { id: '5', label: '[5] Porcentagem (%)' }
               ].map((op) => (
                 <button
                   key={op.id}

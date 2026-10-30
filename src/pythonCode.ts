@@ -1,5 +1,5 @@
 export const FULL_PYTHON_SCRIPT = `# ========================================================
-# CALCULADORA BÁSICA EM PYTHON COM 4 OPERAÇÕES
+# CALCULADORA BÁSICA EM PYTHON COM 5 OPERAÇÕES
 # Criado para iniciantes em programação
 # Autor: Igor Almeida (@igoralmeidall | igoralmeida.online)
 # ========================================================
@@ -25,6 +25,14 @@ def dividir(a: float, b: float):
         return "Erro: Não é possível dividir por zero!"
     return a / b
 
+def porcentagem(a: float, b: float) -> float:
+    """
+    Calcula a porcentagem: retorna b% de a.
+    Fórmula: (a * b) / 100
+    Exemplo: porcentagem(200, 15) -> calcula 15% de 200 = 30.0
+    """
+    return (a * b) / 100
+
 def exibir_menu():
     """Exibe o menu de operações disponíveis no terminal."""
     print("\\n" + "=" * 36)
@@ -34,7 +42,8 @@ def exibir_menu():
     print("  [2] - Subtração")
     print("  [3] * Multiplicação")
     print("  [4] / Divisão")
-    print("  [5] H Ver Histórico")
+    print("  [5] % Porcentagem")
+    print("  [6] H Ver Histórico")
     print("  [0] S Sair do programa")
     print("=" * 36)
 
@@ -47,7 +56,7 @@ def main():
     # Loop infinito: o programa continua rodando até o usuário escolher sair
     while True:
         exibir_menu()
-        opcao = input("Escolha uma opção (0 a 5): ").strip()
+        opcao = input("Escolha uma opção (0 a 6): ").strip()
 
         # 1. Opção para encerrar
         if opcao == "0" or opcao.lower() == "s":
@@ -55,7 +64,7 @@ def main():
             break
 
         # 2. Opção para visualizar histórico
-        elif opcao == "5" or opcao.lower() == "h":
+        elif opcao == "6" or opcao.lower() == "h":
             print("\\n--- HISTÓRICO DE CÁLCULOS ---")
             if not historico:
                 print("Nenhum cálculo registrado ainda.")
@@ -64,9 +73,9 @@ def main():
                     print(f"{idx}. {item}")
             continue
 
-        # 3. Validação da opção das 4 operações básicas
-        elif opcao not in ["1", "2", "3", "4", "+", "-", "*", "/"]:
-            print("\\n[!] Opção inválida. Digite 1, 2, 3, 4, 5 ou 0.")
+        # 3. Validação da opção das operações
+        elif opcao not in ["1", "2", "3", "4", "5", "+", "-", "*", "/", "%"]:
+            print("\\n[!] Opção inválida. Digite 1, 2, 3, 4, 5, 6 ou 0.")
             continue
 
         # 4. Entrada dos números com tratamento de erros
@@ -90,6 +99,9 @@ def main():
         elif opcao in ["4", "/"]:
             simbolo = "/"
             resultado = dividir(num1, num2)
+        elif opcao in ["5", "%"]:
+            simbolo = "%"
+            resultado = porcentagem(num1, num2)
 
         # 6. Apresentação do resultado e salvamento no histórico
         if isinstance(resultado, str) and "Erro" in resultado:
